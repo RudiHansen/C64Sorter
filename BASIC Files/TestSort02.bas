@@ -191,7 +191,8 @@
 8820 rem free lines for other from 9-23
 
 9000 rem sub print array
-9005 return
+9001 rem First i need the length of the last string in the array.
+9005 
 9010 for i=0 to n-1
 9020 print ns(i);
 9030 if (i + 1 - int((i + 1) / 7) * 7) = 0 then print: rem print a new line if i mod 7

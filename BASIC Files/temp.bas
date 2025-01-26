@@ -1,33 +1,31 @@
-8500 rem prints main screen
-8510 print chr$(147)
-8520 print "{white}{cm a}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{cm s}";
-8530 print "{125}    test sorting algoritms on c65     {125}";
-8540 print "{125}                                      {125}";
-8550 print "{125}  process:               free mem:    {125}";
-8560 print "{125}  steps  :                            {125}";
-8570 print "{125}                                      {125}";
-8580 print "{125}  result :                            {125}";
-8590 print "{125}                                      {125}";
-8600 print "{cm q}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{cm w}";
-8610 print "{125}                                      {125}";
-8620 print "{125}                                      {125}";
-8630 print "{125}                                      {125}";
-8640 print "{125}                                      {125}";
-8650 print "{125}                                      {125}";
-8660 print "{125}                                      {125}";
-8670 print "{125}                                      {125}";
-8680 print "{125}                                      {125}";
-8690 print "{125}                                      {125}";
-8700 print "{125}                                      {125}";
-8710 print "{125}                                      {125}";
-8720 print "{125}                                      {125}";
-8730 print "{125}                                      {125}";
-8740 print "{125}                                      {125}";
-8750 print "{125}                                      {125}";
-8760 print "{cm z}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}";
-8770 poke 2023,125
-8780 rem process at 3,12
-8790 rem steps as 4,12
-8800 rem result at 6,12
-8810 rem mem at 4,26
-8820 rem free lines for other from 9-23
+8500 n=100:                   rem the number of numbers to sort
+8600 dim ns(n):              rem the array of numbers
+
+8610 r = rnd(-se):           rem set seed for random
+8620 for i = 1 to n
+8630 ns(i)=int(rnd(1)*1000)
+8640 next i
+
+
+
+9800 rem sub print array
+9900 l1 = len(str$(ns(n)))+1: rem get len of last element in index
+10000 l2 = int(39/l1):         rem get num of elements in output line
+10100 l3 = int(n/l2)+1:        rem num of records in output array
+10200 dim pa$(l3):             rem dim output array
+10300 pc=0:                    rem init output array counter
+
+10400 print l1
+10500 print l2
+10510 print l3
+
+10600 for i=0 to n-1:                                  rem loop all elements
+10700   l1$ = str$(ns(i)):                             rem get length of element
+10800   if(len(l1$)<l1) then l1$=l1$+" " : goto 10800:  rem add spaces
+10900   pa$(pc) = pa$(pc) + l1$:                       rem all element to output
+11000   if(i+1-int((i+1)/l2)*l2)=0 then pc=pc+1:       rem if mod num of elements, add array counter
+11100 next i
+
+11200 for i=0 to pc
+11300   print pa$(i)
+11400 next i
