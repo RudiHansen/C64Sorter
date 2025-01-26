@@ -7,3 +7,9 @@
              POKE 53296,1
 
 2025-01-26 : Husk at push til git med "git push" når du comitter rettelser.
+2025-01-26 : Tilføjet brugen af main screen, og sørger for at status bliver
+             udskrevet de rigtige steder på skærmen.
+
+TODO: Udskrivning af det sorterede array
+      Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
+      Se om der er andre sorterings rutiner der skal afprøves.

@@ -24,40 +24,43 @@
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
 150 dim sk(n2):              rem the array used in qsort
-160 REM goto 230
+160 dim r1$(3) :              rem array for results
 
-200 gosub 1000:              rem generate numbers to sort
-210 gosub 2000:              rem sort using bubble sort
-220 gosub 9000:              rem print sorted array
-230 gosub 1000:              rem generate numbers to sort
-240 px=9: py=1: pt$ = "start qsort": gosub 8000
-250 w1=timer
-260 gosub 4000:              rem sort using quick sort
-270 px=11: py=1: pt$="qsort in      "+str$((timer-w1)/100)+"sec." : gosub 8000
-280 gosub 9000:              rem print sorted array
+200 gosub 8500:              rem print main screen
+210 gosub 1000:              rem generate numbers to sort
+220 gosub 2000:              rem sort using bubble sort
+230 gosub 9000:              rem print sorted array
+240 gosub 1000:              rem generate numbers to sort
+270 gosub 4000:              rem sort using quick sort
+280 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
+285 r1$(1) = "qsort in"+str$((timer-s1)/100)+"sec.      "
+288 gosub 8400: rem sleep
+290 gosub 9000:              rem print sorted array
+295 print chr$(147)
+300 print r1$(0)
+310 print r1$(1)
 
 999 end:                     rem end program
 
 1000 rem sub generate numbers to sort
-1010 px=3: py=1 : pt$ = "generating numbers to sort" : gosub 8000
+1010 px=3: py=12 : pt$ = "gen num      " : gosub 8000
 1020 r = rnd(-se):           rem set seed for random
 1030 for i = 1 to n
 1040 ns(i)=int(rnd(1)*1000)
 1050 next i
-1060 px=4: py=1 : pt$ = "generation done" : gosub 8000
+1060 px=3: py=12 : pt$ = "done         " : gosub 8000
 1080 return
 
 2000 rem sub bubble sort
-2010 px=5: py=1 : pt$ = "sort numbers using bubble sort" : gosub 8000
-2020 px=6: py=1 : pt$ = "start sort" : gosub 8000
+2010 px=3: py=12 : pt$ = "bubble sort" : gosub 8000
 2030 s1=timer:               rem init timer
 2040 s2=0:                   rem init step counter
 2050 rem else
 2060 : rem sw=whether this pass has had any swaps
 2070 : rem start of pass
 2080 :   s2=s2+1
-2090 :   px=7: py=1 : pt$ = "step"+str$(s2) : gosub 8000
-2100 :   px=7: py=20: pt$ = "Free mem"+str$(fre(0)): gosub 8000
+2090 :   px=4: py=12 : pt$ = str$(s2)+"   " : gosub 8000
+2100 :   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
 2120 :   sw=0
 2130 :   for x=0 to n-2
 2140 :     if ns(x)<=ns(x+1) then goto 2220
@@ -70,7 +73,9 @@
 2210 :     rem endif
 2220 :   next
 2230 : if sw then goto 2070
-2240 px=8: py=1: pt$ = "bubble sort in"+str$((timer-s1)/100)+"sec." : gosub 8000
+2240 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+2245 r1$(0) = "bubble sort in"+str$((timer-s1)/100)+"sec."
+2250 gosub 8400: rem sleep 
 2260 return
 
 4000 rem quick sort
@@ -86,6 +91,8 @@
 4100 lo = 0
 4110 hi = n - 1
 4120 s3=0
+4125 px=3: py=12: pt$ = "qsort         ": gosub 8000
+4128 s1=timer
 4130 rem recursive portion of algorithm
 4140 rem inputs:
 4150 rem - a contains array to sort
@@ -93,8 +100,8 @@
 4170 rem - hi contains high index
 4180 rem outputs: a contains partially sorted array
 4190 s3=s3+1: rem setup step counter and prints status
-4200 px=10: py=1 : pt$ = "step"+str$(s3) : gosub 8000
-4210 px=10: py=20: pt$ = "Free mem"+str$(fre(0))+"     ": gosub 8000
+4200 px=4: py=12 : pt$ = str$(s3)+"     " : gosub 8000
+4210 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
 4220 if lo >= hi or lo < 0 then return
 4230 gosub 4370: rem parition array and get pivot index (p)
 4240 sp = sp + 1: sk(sp) = lo: rem push lo
@@ -133,13 +140,21 @@
 4570 t = ns(hi)
 4580 ns(hi) = ns(p)
 4590 ns(p) = t
-4600 return
+4640 return
 
 8000 rem sub print text at pos on screen, uses px,py,pt$
 8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
-8020 rem poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
-8030 sys 65520, 0, px, py: print pt$ : rem c128
+8015 for i = 1 to len(pt$) : rem loop to find space
+8018     if mid$(pt$, i, 1) <> " " then goto 8020
+8019 next i
+8020 pt$ = mid$(pt$, i): rem remove spaces
+8021 poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
+8030 rem 65520, 0, px, py: print pt$ : rem c128
 8040 return
+
+8400 rem sub sleep
+8410 for t = 1 to 1000: next t : rem sleep
+8420 return
 
 8500 rem sub prints main screen
 8510 print chr$(147)
