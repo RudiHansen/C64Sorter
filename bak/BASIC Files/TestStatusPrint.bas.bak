@@ -1,5 +1,0 @@
-10 for i = 0 to 10
-20 print "status=";i
-25 print "{up*2}"
-30 for t = 1 to 1000: next t : rem laver en lille pause
-40 next i
