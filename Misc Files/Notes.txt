@@ -1,7 +1,9 @@
-2024-01-25 : Lidt mærkelig ting jeg så på c128'eren
+2025-01-25 : Lidt mærkelig ting jeg så på c128'eren
              Det virker som om den er længere tid om at køre sorter programmet
              end c64, bare lidt mærkeligt
 
-2024-01-25 : http://commodore128.mirkosoft.sk/basic_v7.html
+2025-01-25 : http://commodore128.mirkosoft.sk/basic_v7.html
              Har bla. en commando til at skifte 128 i 2MHz mode
              POKE 53296,1
+
+2025-01-26 : Husk at push til git med "git push" når du comitter rettelser.
