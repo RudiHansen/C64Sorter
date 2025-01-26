@@ -12,4 +12,5 @@
 
 TODO: Udskrivning af det sorterede array
       Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
+      Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
       Se om der er andre sorterings rutiner der skal afprøves.
