@@ -9,9 +9,9 @@
 2025-01-26 : Husk at push til git med "git push" når du comitter rettelser.
 2025-01-26 : Tilføjet brugen af main screen, og sørger for at status bliver
              udskrevet de rigtige steder på skærmen.
+2025-01-27 : Udskrivning af det sorterede array
 
-TODO: Udskrivning af det sorterede array
-      Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
+TODO: Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
       Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
       Se om der er andre sorterings rutiner der skal afprøves.
       Oprydning, renumbering, og se om nogen rutiner skal skrives om.

@@ -20,11 +20,12 @@
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
 130 n=100:                   rem the number of numbers to sort
-135 n2=(n*1.1):              rem array size for the sk array, 
+135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
 150 dim sk(n2):              rem the array used in qsort
-160 dim r1$(3) :              rem array for results
+160 dim r1$(3) :             rem array for results
+170 dim pa$(n):              rem array used in sub print array
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -144,10 +145,10 @@
 
 8000 rem sub print text at pos on screen, uses px,py,pt$
 8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
-8015 for i = 1 to len(pt$) : rem loop to find space
-8018     if mid$(pt$, i, 1) <> " " then goto 8020
-8019 next i
-8020 pt$ = mid$(pt$, i): rem remove spaces
+8015 for j = 1 to len(pt$) : rem loop to find space
+8018     if mid$(pt$, j, 1) <> " " then goto 8020
+8019 next j
+8020 pt$ = mid$(pt$, j): rem remove spaces
 8021 poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
 8030 rem 65520, 0, px, py: print pt$ : rem c128
 8040 return
@@ -189,13 +190,45 @@
 8800 rem result at 6,12
 8810 rem mem at 4,26
 8820 rem free lines for other from 9-23
+8830 return
 
 9000 rem sub print array
-9001 rem First i need the length of the last string in the array.
-9005 
-9010 for i=0 to n-1
-9020 print ns(i);
-9030 if (i + 1 - int((i + 1) / 7) * 7) = 0 then print: rem print a new line if i mod 7
-9040 next
-9050 print
-9060 return
+9010 rem ** init variables
+9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
+9030 l2 = int(39/l1):         rem get num of elements in output line
+9040 l3 = int(n/l2)+1:        rem num of records in output array
+9060 pc=0:                    rem init output array counter
+9065 px=3: py=12: pt$ = "print        ": gosub 8000
+9070 rem
+9080 rem ** loop all elements and create strings for output in pa$
+9085 pa$(pc) = ""
+9090 for i=0 to n-1:                                  rem loop all elements
+9100   l1$ = str$(ns(i)):                             rem get length of element
+9110   if(len(l1$)<l1) then l1$=l1$+" " : goto 9110:  rem add spaces
+9120   pa$(pc) = pa$(pc) + l1$:                       rem all element to output
+9130   if(i+1-int((i+1)/l2)*l2)=0 then pc=pc+1:pa$(pc) = "":rem if mod num of elements, add array counter
+9140 next i
+9150 rem
+9160 rem ** output pa$() to screen
+9170 rem ** print to lines 10-20
+9180 rem ** line 22 can contain instructions to user
+9190 px=22: py=3 : pt$ = "press any key to continue" : gosub 8000
+9200 px=10: py=1:      rem setup where to print text
+9210 for i=0 to pc
+9220   pt$ = pa$(i) : gosub 8000
+9230   px = px + 1
+9240   if px>20 then px=10:gosub 10000
+9250 next i
+9260 pt$ = "-                                     "
+9270 for px=px to 20
+9280   gosub 8000
+9290 next px
+9300 gosub 10000: rem wait for keypress
+9310 px=22: py=3 : pt$ = "-                        " : gosub 8000
+9320 return
+
+10000 rem simple get-input-routine
+10010 a$="": : rem initialize variables
+10020 get a$: if a$="" then 10020
+10030 return
+
