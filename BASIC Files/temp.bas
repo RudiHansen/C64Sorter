@@ -1,4 +1,5 @@
-8500 n=50:                   rem the number of numbers to sort
+100 print chr$(147)
+500 n=100:                   rem the number of numbers to sort
 8600 dim ns(n):              rem the array of numbers
 
 8610 r = rnd(-se):           rem set seed for random
@@ -29,29 +30,21 @@
 11120 rem ** output pa$() to screen
 11130 rem ** print to lines 10-20
 11140 rem ** line 22 can contain instructions to user
-11145 print chr$(147)
-11148 print pc
-11150 if pc <= 10 then gosub 11200 : rem print with no user interaction
-11160 if pc > 10  then gosub 13000 : rem print with scrolling
-11170 end
-
-11200 rem
-11210 rem ** sub print with no user interaction
-11215 print "sub 1";pc
 11220 px=22: py=3 : pt$ = "press any key to continue" : gosub 20000
 11230 px=10: py=1:      rem setup where to print text
 11300 for i=0 to pc
 11305   pt$ = pa$(i) : gosub 20000 
 11310   px = px + 1
-11320   if px>10 then px=10:gosub 30000
+11320   if px>20 then px=10:gosub 30000
 11400 next i
-11405 gosub 30000: rem wait for keypress
-11410 return
+11405 pt$ = "-                                     "
+11410 for px=px to 20
+11430   gosub 20000
+11440 next px
+11505 gosub 30000: rem wait for keypress
+11508 px=22: py=3 : pt$ = "-                        " : gosub 20000
+11510 end
 
-13000 rem
-13010 rem ** print with scrolling
-13015 print "sub 2"
-13020 return
 
 20000 rem sub print text at pos on screen, uses px,py,pt$
 20010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
@@ -67,4 +60,3 @@
 30010 a$="": : rem initialize variables
 30020 get a$: if a$="" then 30020
 30050 return
-
