@@ -13,8 +13,11 @@
 2025-01-27 : Add sub clean main screen
              Changed sub print text at pos on screen, to not remove spaces if first char is a -
 
-TODO: Tror det skal gøres ved lige at lave en sub metode som skriver blank tegn i felterne.
-      Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
+TODO: Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
       Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
       Se om der er andre sorterings rutiner der skal afprøves.
       Oprydning, renumbering, og se om nogen rutiner skal skrives om.
+      Problem in sub print array, line 9000 - 9320
+        The last line of PA$ that is printed out seems to have some numbers
+        at the end that are wrong, the problem it that old lines are not overwritten
+        so "old" numbers are still there.

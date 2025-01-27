@@ -5,21 +5,16 @@
 45 rem ** Version 02                    **
 50 rem ***********************************
 60 rem https://builtin.com/machine-learning/fastest-sorting-algorithm
-61 rem n=100 Bubble 92 steps , 104 sec, qsort 129 steps, 24 sec
-62 rem n=200 Bubble 178 steps , 417 sec, qsort 265 steps, 48 sec
+61 rem n=100 B 2349 steps 119 sec, B2 2398 steps 104 sec, q 129 steps, 45 sec
+62 rem n=200 B 10141 steps 461 sec, B2 10227 steps 415 sec, q 265 steps, 145 sec
 63 rem n=400 Bubble 393, 1709 sec, qsort 86 sec
 64 rem n=600 Bubble 567 steps , 3785 sec, qsort 831 steps, 165 sec
 70 rem *************************************************************************
-71 rem ** changes v02 **
-72 rem ** changed the sub print text at pos on screen
-73 rem **     added a new line for the sys calls on c128
-74 rem **     so remember to rem out the right line before use
-99 rem *************************************************************************
 
 100 print chr$(147)
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=100:                   rem the number of numbers to sort
+130 n=200:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
@@ -31,17 +26,24 @@
 210 gosub 1000:              rem generate numbers to sort
 220 gosub 2000:              rem sort using bubble sort
 230 gosub 9000:              rem print sorted array
-235 gosub 8900:              rem sub clean main screen.
-240 gosub 1000:              rem generate numbers to sort
-270 gosub 4000:              rem sort using quick sort
-280 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
-285 r1$(1) = "qsort in"+str$((timer-s1)/100)+"sec.      "
-288 gosub 8400: rem sleep
-290 gosub 9000:              rem print sorted array
-292 gosub 8900:              rem sub clean main screen.
-295 print chr$(147)
-300 print r1$(0)
-310 print r1$(1)
+240 gosub 8900:              rem sub clean main screen.
+
+250 gosub 1000:              rem generate numbers to sort
+260 gosub 3000:              rem sort using bubble sort2
+270 gosub 9000:              rem print sorted array
+280 gosub 8900:              rem sub clean main screen.
+
+290 gosub 1000:              rem generate numbers to sort
+300 gosub 4000:              rem sort using quick sort
+310 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
+320 r1$(2) = "qsort in"+str$((timer-s1)/100)+"sec.      "
+330 gosub 8400: rem sleep
+340 gosub 9000:              rem print sorted array
+350 gosub 8900:              rem sub clean main screen.
+360 print chr$(147)
+370 print r1$(0)
+380 print r1$(1)
+390 print r1$(2)
 
 999 end:                     rem end program
 
@@ -61,7 +63,6 @@
 2050 rem else
 2060 : rem sw=whether this pass has had any swaps
 2070 : rem start of pass
-2080 :   s2=s2+1
 2090 :   px=4: py=12 : pt$ = str$(s2)+"   " : gosub 8000
 2100 :   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
 2120 :   sw=0
@@ -72,6 +73,7 @@
 2170 :       s=ns(x+1)
 2180 :       ns(x+1)=ns(x)
 2190 :       ns(x)=s
+2195 :       s2=s2+1
 2200 :       sw=-1
 2210 :     rem endif
 2220 :   next
@@ -80,6 +82,34 @@
 2245 r1$(0) = "bubble sort in"+str$((timer-s1)/100)+"sec."
 2250 gosub 8400: rem sleep 
 2260 return
+
+3000 rem bubble sort 2
+3010 px=3: py=12 : pt$ = "bubble sort2" : gosub 8000
+3020 s1=timer:               rem init timer
+3030 s2=0:                   rem init step counter
+3040 te=0:                   rem temp variable for swap
+3050 sw=0:                   rem varaible to hold if anything has been swapped
+3060 for x1=0 to n-1
+3070   sw=0
+3080   for x2=0 to (n-x1-1)
+3090     if ns(x2) > ns(x2+1) then gosub 3500 : rem goto swap
+3110   next x2
+3111 px=4: py=12 : pt$ = str$(s2)+"   " : gosub 8000
+3112 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+3120   if(sw=0) goto 3140: rem end sorting
+3130 next x1
+3140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+3150 r1$(1) = "bubble sort2 in"+str$((timer-s1)/100)+"sec."
+3160 gosub 8400: rem sleep 
+3170 return
+
+3500 rem sub swap
+3510 te       = ns(x2)
+3520 ns(x2)   = ns(x2+1)
+3530 ns(x2+1) = temp
+3540 sw       = 1
+3570 s2=s2+1
+3580 return
 
 4000 rem quick sort
 4010 rem commodore basic does not really support recursion because everything
