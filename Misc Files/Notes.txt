@@ -13,11 +13,21 @@
 2025-01-27 : Add sub clean main screen
              Changed sub print text at pos on screen, to not remove spaces if first char is a -
 
-TODO: Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
-      Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
+TODO: Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
       Se om der er andre sorterings rutiner der skal afprøves.
       Oprydning, renumbering, og se om nogen rutiner skal skrives om.
       Problem in sub print array, line 9000 - 9320
         The last line of PA$ that is printed out seems to have some numbers
         at the end that are wrong, the problem it that old lines are not overwritten
         so "old" numbers are still there.
+      Bubble Sort & Bubble Sort 2 are kind of the same
+        https://www.geeksforgeeks.org/bubble-sort-algorithm/
+        I think I will just copy BS2 up to BS and just remove the check for sw
+        It does actually not make a lot of difference on the time of the data
+        set I am currently using.
+      Add a routine for validating if the array is sorted.
+      Add user input of number of items in array, and Y/N to show result
+        Think this is one of the last things to do, and the Y/N to show results
+        gives an option of running all tests with no pause for showing the result
+        for each algorithm.
+  
