@@ -31,12 +31,14 @@
 210 gosub 1000:              rem generate numbers to sort
 220 gosub 2000:              rem sort using bubble sort
 230 gosub 9000:              rem print sorted array
+235 gosub 8900:              rem sub clean main screen.
 240 gosub 1000:              rem generate numbers to sort
 270 gosub 4000:              rem sort using quick sort
 280 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
 285 r1$(1) = "qsort in"+str$((timer-s1)/100)+"sec.      "
 288 gosub 8400: rem sleep
 290 gosub 9000:              rem print sorted array
+292 gosub 8900:              rem sub clean main screen.
 295 print chr$(147)
 300 print r1$(0)
 310 print r1$(1)
@@ -145,6 +147,7 @@
 
 8000 rem sub print text at pos on screen, uses px,py,pt$
 8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
+8012 if mid$(pt$,1,1)="-" then pt$ = " " + mid$(pt$, 2) : goto 8021: rem if first char is - replace with space and do not remove space from string
 8015 for j = 1 to len(pt$) : rem loop to find space
 8018     if mid$(pt$, j, 1) <> " " then goto 8020
 8019 next j
@@ -192,6 +195,16 @@
 8820 rem free lines for other from 9-23
 8830 return
 
+8900 rem sub clean main screen.
+8910 px=3: py=12: pt$ = "-             ":                        gosub 8000
+8920 px=4: py=12: pt$ = "-             ":                        gosub 8000
+8930 px=6: py=12: pt$ = "-             ":                        gosub 8000
+8940 px=4: py=26: pt$ = "-           ":                          gosub 8000
+8945 for px=9 to 23
+8950   py=1:      pt$ = "-                                    ": gosub 8000
+8960 next px
+8970 return
+
 9000 rem sub print array
 9010 rem ** init variables
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
@@ -219,8 +232,8 @@
 9230   px = px + 1
 9240   if px>20 then px=10:gosub 10000
 9250 next i
-9260 pt$ = "-                                     "
 9270 for px=px to 20
+9275   pt$ = "-                                     "
 9280   gosub 8000
 9290 next px
 9300 gosub 10000: rem wait for keypress

@@ -10,8 +10,11 @@
 2025-01-26 : Tilføjet brugen af main screen, og sørger for at status bliver
              udskrevet de rigtige steder på skærmen.
 2025-01-27 : Udskrivning af det sorterede array
+2025-01-27 : Add sub clean main screen
+             Changed sub print text at pos on screen, to not remove spaces if first char is a -
 
-TODO: Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
+TODO: Tror det skal gøres ved lige at lave en sub metode som skriver blank tegn i felterne.
+      Tilføj en optimeret version af bubble sort https://www.geeksforgeeks.org/bubble-sort-algorithm/
       Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
       Se om der er andre sorterings rutiner der skal afprøves.
       Oprydning, renumbering, og se om nogen rutiner skal skrives om.
