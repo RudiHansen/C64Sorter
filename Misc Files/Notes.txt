@@ -28,6 +28,11 @@ TODO: Check if other sorting algoritms needs to be added
         Think this is one of the last things to do, and the Y/N to show results
         gives an option of running all tests with no pause for showing the result
         for each algorithm.
+      Found some different ways of generating the array to use in the sorting
+        For now I have just put them in as comments, but would perhaps be a good
+        idea to implement them.
+        Still not sure if it should be so the program can test them all, 
+        or if the user should just be allowed to choose witch one to use.
 
 
 RESULTS FROM SORT
