@@ -14,7 +14,7 @@
 100 print chr$(147)
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=600:                   rem the number of numbers to sort
+130 n=200:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
@@ -274,7 +274,6 @@
 
 9000 rem sub print array
 9010 rem ** init variables
-9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
