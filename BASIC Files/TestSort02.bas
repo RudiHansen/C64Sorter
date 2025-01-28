@@ -36,7 +36,7 @@
 290 gosub 1000:              rem generate numbers to sort
 300 gosub 4000:              rem sort using quick sort
 310 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
-320 r1$(2) = "qsort in"+str$((timer-s1)/100)+"sec.      "
+320 r1$(2) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
 330 gosub 8400: rem sleep
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
@@ -56,50 +56,49 @@
 1060 px=3: py=12 : pt$ = "done         " : gosub 8000
 1080 return
 
-2000 rem sub bubble sort
+2000 rem bubble sort
 2010 px=3: py=12 : pt$ = "bubble sort" : gosub 8000
-2030 s1=timer:               rem init timer
-2040 s2=0:                   rem init step counter
-2050 rem else
-2060 : rem sw=whether this pass has had any swaps
-2070 : rem start of pass
-2090 :   px=4: py=12 : pt$ = str$(s2)+"   " : gosub 8000
-2100 :   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
-2120 :   sw=0
-2130 :   for x=0 to n-2
-2140 :     if ns(x)<=ns(x+1) then goto 2220
-2150 :     rem else
-2160 :       rem s=placeholder value
-2170 :       s=ns(x+1)
-2180 :       ns(x+1)=ns(x)
-2190 :       ns(x)=s
-2195 :       s2=s2+1
-2200 :       sw=-1
-2210 :     rem endif
-2220 :   next
-2230 : if sw then goto 2070
-2240 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
-2245 r1$(0) = "bubble sort in"+str$((timer-s1)/100)+"sec."
-2250 gosub 8400: rem sleep 
-2260 return
+2020 s1=timer:               rem init timer
+2030 s2=0:                   rem init step counter
+2040 te=0:                   rem temp variable for swap
+2050 sw=0:                   rem varaible to hold if anything has been swapped
+2060 for x1=0 to n-1
+2070   sw=0
+2080   for x2=0 to (n-x1-1)
+2090     if ns(x2) > ns(x2+1) then gosub 2500 : rem goto swap
+2110   next x2
+2111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
+2112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+2120   if(sw=0) goto 2140: rem end sorting
+2130 next x1
+2140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+2150 r1$(0) = "bubble sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+2160 gosub 8400: rem sleep 
+2170 return
+
+2500 rem sub swap
+2510 te       = ns(x2)
+2520 ns(x2)   = ns(x2+1)
+2530 ns(x2+1) = temp
+2540 sw       = 1
+2570 s2=s2+1
+2580 return
+
 
 3000 rem bubble sort 2
 3010 px=3: py=12 : pt$ = "bubble sort2" : gosub 8000
 3020 s1=timer:               rem init timer
 3030 s2=0:                   rem init step counter
 3040 te=0:                   rem temp variable for swap
-3050 sw=0:                   rem varaible to hold if anything has been swapped
 3060 for x1=0 to n-1
-3070   sw=0
 3080   for x2=0 to (n-x1-1)
 3090     if ns(x2) > ns(x2+1) then gosub 3500 : rem goto swap
 3110   next x2
-3111 px=4: py=12 : pt$ = str$(s2)+"   " : gosub 8000
-3112 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
-3120   if(sw=0) goto 3140: rem end sorting
+3111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
+3112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
 3130 next x1
 3140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
-3150 r1$(1) = "bubble sort2 in"+str$((timer-s1)/100)+"sec."
+3150 r1$(1) = "bubble sort2"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
 3160 gosub 8400: rem sleep 
 3170 return
 
@@ -107,7 +106,6 @@
 3510 te       = ns(x2)
 3520 ns(x2)   = ns(x2+1)
 3530 ns(x2+1) = temp
-3540 sw       = 1
 3570 s2=s2+1
 3580 return
 
@@ -237,6 +235,7 @@
 
 9000 rem sub print array
 9010 rem ** init variables
+9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
