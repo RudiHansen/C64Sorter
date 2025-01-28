@@ -14,7 +14,7 @@
 100 print chr$(147)
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=200:                   rem the number of numbers to sort
+130 n=600:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
@@ -68,15 +68,12 @@
 2020 s1=timer:               rem init timer
 2030 s2=0:                   rem init step counter
 2040 te=0:                   rem temp variable for swap
-2050 sw=0:                   rem varaible to hold if anything has been swapped
 2060 for x1=0 to n-1
-2070   sw=0
 2080   for x2=0 to (n-x1-1)
 2090     if ns(x2) > ns(x2+1) then gosub 2500 : rem goto swap
 2110   next x2
 2111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
 2112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
-2120   if(sw=0) goto 2140: rem end sorting
 2130 next x1
 2140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
 2150 r1$(0) = "bubble sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
@@ -87,7 +84,6 @@
 2510 te       = ns(x2)
 2520 ns(x2)   = ns(x2+1)
 2530 ns(x2+1) = temp
-2540 sw       = 1
 2570 s2=s2+1
 2580 return
 
@@ -97,12 +93,15 @@
 3020 s1=timer:               rem init timer
 3030 s2=0:                   rem init step counter
 3040 te=0:                   rem temp variable for swap
+3050 sw=0:                   rem varaible to hold if anything has been swapped
 3060 for x1=0 to n-1
+3070   sw=0
 3080   for x2=0 to (n-x1-1)
 3090     if ns(x2) > ns(x2+1) then gosub 3500 : rem goto swap
 3110   next x2
 3111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
 3112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+3120 if(sw=0) goto 3140: rem end sorting
 3130 next x1
 3140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
 3150 r1$(1) = "bubble sort2"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
@@ -114,6 +113,7 @@
 3520 ns(x2)   = ns(x2+1)
 3530 ns(x2+1) = temp
 3570 s2=s2+1
+3575 sw       = 1
 3580 return
 
 4000 rem quick sort
@@ -128,7 +128,7 @@
 4090 rem outputs: ns contains sorted array
 4100 lo = 0
 4110 hi = n - 1
-4120 s3=0
+4120 s2=0
 4125 px=3: py=12: pt$ = "qsort         ": gosub 8000
 4128 s1=timer
 4130 rem recursive portion of algorithm
@@ -137,8 +137,8 @@
 4160 rem - lo contains low index
 4170 rem - hi contains high index
 4180 rem outputs: a contains partially sorted array
-4190 s3=s3+1: rem setup step counter and prints status
-4200 px=4: py=12 : pt$ = str$(s3)+"     " : gosub 8000
+4190 rem print status
+4200 px=4: py=12 : pt$ = str$(s2)+"     " : gosub 8000
 4210 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
 4220 if lo >= hi or lo < 0 then return
 4230 gosub 4370: rem parition array and get pivot index (p)
@@ -172,6 +172,7 @@
 4510     t = ns(j)
 4520     ns(j) = ns(p)
 4530     ns(p) = t
+4535     s2=s2+1: rem inc step counter
 4540 next j
 4550 rem move pivot to correct position
 4560 p = p + 1
@@ -229,7 +230,7 @@
 8500 rem sub prints main screen
 8510 print chr$(147)
 8520 print "{white}{cm a}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{99}{cm s}";
-8530 print "{125}    test sorting algoritms on c65     {125}";
+8530 print "{125}    test sorting algoritms on c64     {125}";
 8540 print "{125}                                      {125}";
 8550 print "{125}  process:               free mem:    {125}";
 8560 print "{125}  steps  :                            {125}";
@@ -273,6 +274,7 @@
 
 9000 rem sub print array
 9010 rem ** init variables
+9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array

@@ -28,4 +28,14 @@ TODO: Check if other sorting algoritms needs to be added
         Think this is one of the last things to do, and the Y/N to show results
         gives an option of running all tests with no pause for showing the result
         for each algorithm.
-  
+      Fix step counter in QSort, it should count swaps, not sure what it counts now.
+
+RESULTS FROM SORT
+200 BS      10227   333
+200 BS2     10227   346
+200 QS      621     70
+200 MET     1138    44
+600 BS
+600 BS2
+600 QS
+600 MET
