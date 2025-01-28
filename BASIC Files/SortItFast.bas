@@ -15,12 +15,15 @@
 
 60000 nt=2 
 60005 nt=2*nt 
-60010 if nt<mx/2 then 60005 
-60020 for jl=l to mx-nt 
+60010 if nt<mx/2 then 60005
+60015 print l;j1;(mx-nt) 
+60020 for jl=0 to mx-nt 
 60030 for j2=jl to 1 step -nt 
 60040 if n$(j2)>n$(j2+nt)then 60080 
 60050 next jl:nt=int(nt/2) 
 60060 if nt>0 then 60020 
 60070 return 
-60080 t$=n$(j2):n$(j2)=n$(j2+nt):n$(j2+nt)=t$ 
-60090 next j2:goto 60050
+60080 t$=n$(j2)
+60090 n$(j2)=n$(j2+nt)
+60100 n$(j2+nt)=t$ 
+60110 next j2:goto 60050

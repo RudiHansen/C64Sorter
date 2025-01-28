@@ -21,7 +21,6 @@
 150 dim sk(n2):              rem the array used in qsort
 160 dim r1$(4) :             rem array for results
 170 dim pa$(n):              rem array used in sub print array
-175 goto 360: rem tmp only run last sort
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
 220 gosub 2000:              rem sort using bubble sort
@@ -184,35 +183,33 @@
 5000 rem sub metzner sort
 5010 rem n  = number of items to sort
 5020 rem ns = array of numbers
-5030 rem m  = step size
-5040 rem k  = upper limit for ?
-5050 px=3: py=12: pt$ = "metzner       ": gosub 8000
-5060 s1=timer:          rem init timer
-5070 s2=0:              rem init step counter
-5100 m = n:             rem set initial step size
-5110 m = int(m/2):      rem decrease step size by half, this is also loop start point
-5120 k = n - m:         rem set upper limit for ?
-5130 for j = 0 to k:    rem start for j
-5140     i = j:         rem 
-5150     l = i + m:     rem
-5160     for l = j to 1 step -m
-5170         if(l < n and ns(i) > ns(l)) then gosub 5500: rem 
-5180     next l
-5190     px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
-5200     px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
-5205     px=6: py=12: pt$ = str$(m)+"     ":      gosub 8000
-5210 next j
-5220 if m > 1 goto 5110: rem loop while m > 0
-5230 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
-5240 r1$(3) = "metzner"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
-5250 return
+5030 rem i = some counter
+5040 rem j1 = counter
+5050 rem js = counter
+5060 rem t = temp
+5070 px=3: py=12 : pt$ = "metzner sort" : gosub 8000
+5080 s1=timer:               rem init timer
+5090 s2=0:                   rem init step counter
+5100 i=2 
+5110 i=2*i
+5120 if i<n/2 then 5110
+5130 for jl=0 to n-i 
+5140 for j2=jl to 1 step -i 
+5150 if ns(j2)>ns(j2+i)then 5190
+5160 next jl:i=int(i/2)
+5162 px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
+5164 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000 
+5170 if i>0 then 5130
+5172 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+5174 r1$(3) = "metzner sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+5180 return 
+5190 t=ns(j2)
+5200 ns(j2)=ns(j2+i)
+5210 ns(j2+i)=t
+5215 s2 = s2 + 1
+5220 next j2
+5230 goto 5160
 
-5500 rem sub swap
-5510 t = ns(i)
-5520 ns(j) = ns(i)
-5530 ns(i) = t
-5560 s2 = s2 + 1
-5570 return
 
 8000 rem sub print text at pos on screen, uses px,py,pt$
 8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
