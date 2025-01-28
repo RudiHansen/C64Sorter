@@ -72,6 +72,7 @@
         <FileName>BASIC Files\TestSort02.bas</FileName>
         <FileName>Misc Files\Notes.txt</FileName>
         <FileName>BASIC Files\SortItFast.bas</FileName>
+        <FileName>Assembly Files\FreeMem.asm</FileName>
     </BuildList>
     <DetermineBuildOrder>0</DetermineBuildOrder>
     <PaddingByte>0</PaddingByte>
@@ -265,7 +266,7 @@
             <IncludeInBuild>True</IncludeInBuild>
             <Regions />
             <Breakpoints />
-            <Bookmarks>0,</Bookmarks>
+            <Bookmarks>3,</Bookmarks>
             <Topmost>False</Topmost>
             <FileOpen>True</FileOpen>
         </SourceFile>
@@ -300,7 +301,7 @@
             <Breakpoints />
             <Bookmarks />
             <Topmost>False</Topmost>
-            <FileOpen>False</FileOpen>
+            <FileOpen>True</FileOpen>
         </SourceFile>
         <SourceFile>
             <Name>\Screen Designs\SORT_MAIN.sdd</Name>
@@ -332,7 +333,7 @@
             <Regions />
             <Breakpoints />
             <Bookmarks />
-            <Topmost>True</Topmost>
+            <Topmost>False</Topmost>
             <FileOpen>True</FileOpen>
         </SourceFile>
         <SourceFile>
@@ -356,6 +357,17 @@
             <Bookmarks />
             <Topmost>False</Topmost>
             <FileOpen>False</FileOpen>
+        </SourceFile>
+        <SourceFile>
+            <Name>\Assembly Files\FreeMem.asm</Name>
+            <PrgName />
+            <FileType>2</FileType>
+            <IncludeInBuild>True</IncludeInBuild>
+            <Regions />
+            <Breakpoints />
+            <Bookmarks />
+            <Topmost>True</Topmost>
+            <FileOpen>True</FileOpen>
         </SourceFile>
     </SourceFiles>
 </Project>
