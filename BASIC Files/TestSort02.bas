@@ -83,7 +83,7 @@
 2500 rem sub swap
 2510 te       = ns(x2)
 2520 ns(x2)   = ns(x2+1)
-2530 ns(x2+1) = temp
+2530 ns(x2+1) = te
 2570 s2=s2+1
 2580 return
 
@@ -111,7 +111,7 @@
 3500 rem sub swap
 3510 te       = ns(x2)
 3520 ns(x2)   = ns(x2+1)
-3530 ns(x2+1) = temp
+3530 ns(x2+1) = te
 3570 s2=s2+1
 3575 sw       = 1
 3580 return
