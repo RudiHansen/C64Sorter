@@ -14,15 +14,17 @@
 100 print chr$(147)
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=200:                   rem the number of numbers to sort
+130 n=100:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
 150 dim sk(n2):              rem the array used in qsort
 160 dim r1$(4) :             rem array for results
 170 dim pa$(n):              rem array used in sub print array
+
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
+215 gosub 9000:              rem print unsorted array
 220 gosub 2000:              rem sort using bubble sort
 230 gosub 9000:              rem print sorted array
 240 gosub 8900:              rem sub clean main screen.
@@ -57,11 +59,39 @@
 1000 rem sub generate numbers to sort
 1010 px=3: py=12 : pt$ = "gen num      " : gosub 8000
 1020 r = rnd(-se):           rem set seed for random
+
 1030 for i = 1 to n
-1040 ns(i)=int(rnd(1)*1000)
+1040 ns(i)=int(rnd(1)*1000): rem make random data
 1050 next i
-1060 px=3: py=12 : pt$ = "done         " : gosub 8000
-1080 return
+!-==============================================================================
+!-1030 for i = 1 to n
+!-1040 ns(i) = i * 5 + int(rnd(1)*20) : rem stigende sekvens med små variationer
+!-1050 next i
+!-==============================================================================
+!-======================================================
+!-1030 for i = 1 to n
+!-1040 ns(i) = (n-i) * 10 : rem omvendt sorteret sekvens
+!-1050 next i
+!-======================================================
+!-=====================================================================
+!-1030 for i = 1 to n
+!-1040 if rnd(1) < 0.5 then ns(i) = i * 5 else ns(i) = int(rnd(1)*1000)
+!-1050 next i
+!-
+!-=====================================================================
+!-============================================================
+!-1030 for i = 1 to n
+!-1040 ns(i) = i * 5 : rem start med sorteret data
+!-1050 next i
+!-
+!-1060 for i = 1 to n/10 : rem bytter 10% af elementerne rundt
+!-1070 a = int(rnd(1)*n)+1 : b = int(rnd(1)*n)+1
+!-1080 te = ns(a) : ns(a) = ns(b) : ns(b) = te
+!-1090 next i
+!-
+!-============================================================
+1100 px=3: py=12 : pt$ = "done         " : gosub 8000
+1110 return
 
 2000 rem bubble sort
 2010 px=3: py=12 : pt$ = "bubble sort" : gosub 8000
