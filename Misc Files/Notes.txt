@@ -14,12 +14,11 @@
              Changed sub print text at pos on screen, to not remove spaces if first char is a -
 
 Algoritms used
-        Bubble Sort: https://www.geeksforgeeks.org/bubble-sort-algorithm/
+        Bubble Sort:  https://www.geeksforgeeks.org/bubble-sort-algorithm/
+        metzner Sort: https://commodore.bombjack.org/commodore/books.htm
 
-
-TODO: Tilføj rutinen fra SortItFast, den ser hurtig ud (https://commodore.bombjack.org/commodore/books.htm)
-      Se om der er andre sorterings rutiner der skal afprøves.
-      Oprydning, renumbering, og se om nogen rutiner skal skrives om.
+TODO: Check if other sorting algoritms needs to be added
+      Cleanup, renumbering 
       Problem in sub print array, line 9000 - 9320
         The last line of PA$ that is printed out seems to have some numbers
         at the end that are wrong, the problem it that old lines are not overwritten
