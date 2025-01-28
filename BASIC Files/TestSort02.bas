@@ -163,7 +163,9 @@
 4180 rem outputs: a contains partially sorted array
 4190 rem print status
 4200 px=4: py=12 : pt$ = str$(s2)+"     " : gosub 8000
-4210 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+4205 m1 = peek(52)+peek(53)*256
+4208 m2 = peek(55)+peek(56)*256
+4210 px=4: py=26: pt$ = str$(m1-m2)+"     ": gosub 8000
 4220 if lo >= hi or lo < 0 then return
 4230 gosub 4370: rem parition array and get pivot index (p)
 4240 sp = sp + 1: sk(sp) = lo: rem push lo

@@ -33,6 +33,10 @@ TODO: Check if other sorting algoritms needs to be added
         idea to implement them.
         Still not sure if it should be so the program can test them all, 
         or if the user should just be allowed to choose witch one to use.
+      Memory survailance.
+        I need to test out different ways of monitoring memory usage.
+        Right now in line 4205,4208 i have tried something different than free(0)
+        But I need to have a closer look at this.
 
 
 RESULTS FROM SORT
