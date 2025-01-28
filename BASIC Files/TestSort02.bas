@@ -14,7 +14,7 @@
 100 print chr$(147)
 110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=100:                   rem the number of numbers to sort
+130 n=200:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
@@ -24,7 +24,6 @@
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
-215 gosub 9000:              rem print unsorted array
 220 gosub 2000:              rem sort using bubble sort
 230 gosub 9000:              rem print sorted array
 240 gosub 8900:              rem sub clean main screen.
@@ -63,33 +62,28 @@
 1030 for i = 1 to n
 1040 ns(i)=int(rnd(1)*1000): rem make random data
 1050 next i
-!-==============================================================================
+
 !-1030 for i = 1 to n
-!-1040 ns(i) = i * 5 + int(rnd(1)*20) : rem stigende sekvens med små variationer
+!-1040 ns(i) = i * 5 + int(rnd(1)*20) : rem rising seq with small varianses
 !-1050 next i
-!-==============================================================================
-!-======================================================
+
 !-1030 for i = 1 to n
-!-1040 ns(i) = (n-i) * 10 : rem omvendt sorteret sekvens
+!-1040 ns(i) = (n-i) * 10 : rem reverse sorted sequence
 !-1050 next i
-!-======================================================
-!-=====================================================================
+
 !-1030 for i = 1 to n
 !-1040 if rnd(1) < 0.5 then ns(i) = i * 5 else ns(i) = int(rnd(1)*1000)
 !-1050 next i
-!-
-!-=====================================================================
-!-============================================================
+
 !-1030 for i = 1 to n
-!-1040 ns(i) = i * 5 : rem start med sorteret data
+!-1040 ns(i) = i * 5 : rem start with sorted data
 !-1050 next i
 !-
-!-1060 for i = 1 to n/10 : rem bytter 10% af elementerne rundt
+!-1060 for i = 1 to n/10 : rem swap arround 10% of the data
 !-1070 a = int(rnd(1)*n)+1 : b = int(rnd(1)*n)+1
 !-1080 te = ns(a) : ns(a) = ns(b) : ns(b) = te
 !-1090 next i
-!-
-!-============================================================
+
 1100 px=3: py=12 : pt$ = "done         " : gosub 8000
 1110 return
 
@@ -193,7 +187,7 @@
 4420 rem outputs:
 4430 rem - a contains partitioned array
 4440 rem - p contains pivot index
-4450 pv = ns(hi): rem choose last value as pivot
+4450 pv=ns((lo + hi) / 2): rem choose middle value as pivot
 4460 p = lo - 1: rem set temp pivot index
 4470 rem swap elements less than or equal to pivot, and increment temp index
 4480 for j = lo to hi - 1
@@ -304,6 +298,7 @@
 
 9000 rem sub print array
 9010 rem ** init variables
+9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
