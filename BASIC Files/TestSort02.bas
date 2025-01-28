@@ -19,9 +19,9 @@
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
 150 dim sk(n2):              rem the array used in qsort
-160 dim r1$(3) :             rem array for results
+160 dim r1$(4) :             rem array for results
 170 dim pa$(n):              rem array used in sub print array
-
+175 goto 360: rem tmp only run last sort
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
 220 gosub 2000:              rem sort using bubble sort
@@ -40,10 +40,18 @@
 330 gosub 8400: rem sleep
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
-360 print chr$(147)
-370 print r1$(0)
-380 print r1$(1)
-390 print r1$(2)
+
+360 gosub 8500:              rem print main screen
+370 gosub 1000:              rem generate numbers to sort
+380 gosub 5000:              rem sort using metzner sort
+390 gosub 9000:              rem print sorted array
+400 gosub 8900:              rem sub clean main screen.
+
+500 print chr$(147)
+510 print r1$(0)
+520 print r1$(1)
+530 print r1$(2)
+540 print r1$(3)
 
 999 end:                     rem end program
 
@@ -173,13 +181,46 @@
 4590 ns(p) = t
 4640 return
 
+5000 rem sub metzner sort
+5010 rem n  = number of items to sort
+5020 rem ns = array of numbers
+5030 rem m  = step size
+5040 rem k  = upper limit for ?
+5050 px=3: py=12: pt$ = "metzner       ": gosub 8000
+5060 s1=timer:          rem init timer
+5070 s2=0:              rem init step counter
+5100 m = n:             rem set initial step size
+5110 m = int(m/2):      rem decrease step size by half, this is also loop start point
+5120 k = n - m:         rem set upper limit for ?
+5130 for j = 0 to k:    rem start for j
+5140     i = j:         rem 
+5150     l = i + m:     rem
+5160     for l = j to 1 step -m
+5170         if(l < n and ns(i) > ns(l)) then gosub 5500: rem 
+5180     next l
+5190     px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
+5200     px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+5205     px=6: py=12: pt$ = str$(m)+"     ":      gosub 8000
+5210 next j
+5220 if m > 1 goto 5110: rem loop while m > 0
+5230 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+5240 r1$(3) = "metzner"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+5250 return
+
+5500 rem sub swap
+5510 t = ns(i)
+5520 ns(j) = ns(i)
+5530 ns(i) = t
+5560 s2 = s2 + 1
+5570 return
+
 8000 rem sub print text at pos on screen, uses px,py,pt$
 8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
 8012 if mid$(pt$,1,1)="-" then pt$ = " " + mid$(pt$, 2) : goto 8021: rem if first char is - replace with space and do not remove space from string
-8015 for j = 1 to len(pt$) : rem loop to find space
-8018     if mid$(pt$, j, 1) <> " " then goto 8020
-8019 next j
-8020 pt$ = mid$(pt$, j): rem remove spaces
+8015 for jx = 1 to len(pt$) : rem loop to find space
+8018     if mid$(pt$, jx, 1) <> " " then goto 8020
+8019 next jx
+8020 pt$ = mid$(pt$, jx): rem remove spaces
 8021 poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
 8030 rem 65520, 0, px, py: print pt$ : rem c128
 8040 return
@@ -235,7 +276,6 @@
 
 9000 rem sub print array
 9010 rem ** init variables
-9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
