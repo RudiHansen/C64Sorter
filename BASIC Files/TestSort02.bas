@@ -12,7 +12,7 @@
 70 rem *************************************************************************
 
 100 print chr$(147)
-110 px=1: py=5 : pt$ = "test sorting algorims on c64" : gosub 8000
+110 px=1: py=5: pr=0: pl=30 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
 130 n=200:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
@@ -35,9 +35,8 @@
 
 290 gosub 1000:              rem generate numbers to sort
 300 gosub 4000:              rem sort using quick sort
-310 px=6:py=12:pt$=str$((timer-s1)/100)+"sec.      ":gosub 8000
+310 px=6:py=12:pr=1:pl=15:pt$=str$((timer-s1)/100)+"sec.":gosub 8000
 320 r1$(2) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
-330 gosub 8400: rem sleep
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
 
@@ -56,7 +55,7 @@
 999 end:                     rem end program
 
 1000 rem sub generate numbers to sort
-1010 px=3: py=12 : pt$ = "gen num      " : gosub 8000
+1010 px=3: py=12:pr=0:pl=13 : pt$ = "gen num      " : gosub 8000
 1020 r = rnd(-se):           rem set seed for random
 
 1030 for i = 1 to n
@@ -84,11 +83,11 @@
 !-1080 te = ns(a) : ns(a) = ns(b) : ns(b) = te
 !-1090 next i
 
-1100 px=3: py=12 : pt$ = "done         " : gosub 8000
+1100 px=3: py=12: pr=0: pl=13 : pt$ = "done         " : gosub 8000
 1110 return
 
 2000 rem bubble sort
-2010 px=3: py=12 : pt$ = "bubble sort" : gosub 8000
+2010 px=3: py=12: pr=0: pl=13 : pt$ = "bubble sort" : gosub 8000
 2020 s1=timer:               rem init timer
 2030 s2=0:                   rem init step counter
 2040 te=0:                   rem temp variable for swap
@@ -96,12 +95,11 @@
 2080   for x2=0 to (n-x1-1)
 2090     if ns(x2) > ns(x2+1) then gosub 2500 : rem goto swap
 2110   next x2
-2111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
-2112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+2111   px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):     gosub 8000
+2112   px=4: py=26:: pr=1: pl=12: pt$ = str$(fre(0)): gosub 8000
 2130 next x1
-2140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+2140 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
 2150 r1$(0) = "bubble sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
-2160 gosub 8400: rem sleep 
 2170 return
 
 2500 rem sub swap
@@ -113,7 +111,7 @@
 
 
 3000 rem bubble sort 2
-3010 px=3: py=12 : pt$ = "bubble sort2" : gosub 8000
+3010 px=3: py=12: pr=0: pl=13 : pt$ = "bubble sort2" : gosub 8000
 3020 s1=timer:               rem init timer
 3030 s2=0:                   rem init step counter
 3040 te=0:                   rem temp variable for swap
@@ -123,13 +121,12 @@
 3080   for x2=0 to (n-x1-1)
 3090     if ns(x2) > ns(x2+1) then gosub 3500 : rem goto swap
 3110   next x2
-3111   px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
-3112   px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000
+3111   px=4: py=12: pr=1: pl=13: pt$ = str$(s2)     :     gosub 8000
+3112   px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)) : gosub 8000
 3120 if(sw=0) goto 3140: rem end sorting
 3130 next x1
-3140 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+3140 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
 3150 r1$(1) = "bubble sort2"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
-3160 gosub 8400: rem sleep 
 3170 return
 
 3500 rem sub swap
@@ -153,7 +150,7 @@
 4100 lo = 0
 4110 hi = n - 1
 4120 s2=0
-4125 px=3: py=12: pt$ = "qsort         ": gosub 8000
+4125 px=3: py=12: pr=0: pl=13: pt$ = "qsort": gosub 8000
 4128 s1=timer
 4130 rem recursive portion of algorithm
 4140 rem inputs:
@@ -162,10 +159,8 @@
 4170 rem - hi contains high index
 4180 rem outputs: a contains partially sorted array
 4190 rem print status
-4200 px=4: py=12 : pt$ = str$(s2)+"     " : gosub 8000
-4205 m1 = peek(52)+peek(53)*256
-4208 m2 = peek(55)+peek(56)*256
-4210 px=4: py=26: pt$ = str$(m1-m2)+"     ": gosub 8000
+4200 px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):    gosub 8000
+4210 px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)): gosub 8000
 4220 if lo >= hi or lo < 0 then return
 4230 gosub 4370: rem parition array and get pivot index (p)
 4240 sp = sp + 1: sk(sp) = lo: rem push lo
@@ -214,7 +209,7 @@
 5040 rem j1 = counter
 5050 rem js = counter
 5060 rem t = temp
-5070 px=3: py=12 : pt$ = "metzner sort" : gosub 8000
+5070 px=3: py=12: pr=0: pl=13 : pt$ = "metzner sort" : gosub 8000
 5080 s1=timer:               rem init timer
 5090 s2=0:                   rem init step counter
 5100 i=2 
@@ -224,10 +219,10 @@
 5140 for j2=jl to 1 step -i 
 5150 if ns(j2)>ns(j2+i)then 5190
 5160 next jl:i=int(i/2)
-5162 px=4: py=12 : pt$ = str$(s2)+"   " :     gosub 8000
-5164 px=4: py=26: pt$ = str$(fre(0))+"     ": gosub 8000 
+5162 px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):     gosub 8000
+5164 px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)):  gosub 8000 
 5170 if i>0 then 5130
-5172 px=6: py=12: pt$ = str$((timer-s1)/100)+"sec.    " : gosub 8000
+5172 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
 5174 r1$(3) = "metzner sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
 5180 return 
 5190 t=ns(j2)
@@ -238,16 +233,29 @@
 5230 goto 5160
 
 
-8000 rem sub print text at pos on screen, uses px,py,pt$
-8010 rem px = x pos on screen, py= pos on screen, pt$ = text to print
-8012 if mid$(pt$,1,1)="-" then pt$ = " " + mid$(pt$, 2) : goto 8021: rem if first char is - replace with space and do not remove space from string
-8015 for jx = 1 to len(pt$) : rem loop to find space
-8018     if mid$(pt$, jx, 1) <> " " then goto 8020
-8019 next jx
-8020 pt$ = mid$(pt$, jx): rem remove spaces
-8021 poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
-8030 rem 65520, 0, px, py: print pt$ : rem c128
-8040 return
+8000 rem sub print text at pos on screen, uses px,py,pl,pr,pt$
+8010 rem px  = x pos on screen  py = pos on screen
+8020 rem pl  = length of text   pr = remove leading spaces
+8030 rem pt$ = text to print
+8040 if pr = 0 goto 8090 : rem check if pr=0 then skip remove leading spaces
+8050 for jx = 1 to len(pt$) : rem loop to find space
+8060     if mid$(pt$, jx, 1) <> " " then goto 8080
+8070 next jx
+8080 pt$ = mid$(pt$, jx): rem remove spaces
+8090 rem set length of text by appending spaces
+8100 if pl = 0 goto 8200 :        rem check if pl=0 then skip
+8110 if pl > len(pt$) goto 8140:  rem goto add make pt$ longer
+8120 if pl < len(pt$) goto 8180:  rem goto add make pt$ shorter
+8130 goto 8200:                   rem goto print pt$
+8140 for jx = len(pt$) to pl-1
+8150 pt$ = pt$ + " "
+8160 next jx
+8170 goto 8200
+8180 pt$ = mid$(pt$, 1, pl)
+8190 goto 8200
+8200 poke781,px : poke782,py : sys 65520 : print pt$; : rem c64
+8210 rem 65520, 0, px, py: print pt$ : rem c128
+8220 return
 
 8400 rem sub sleep
 8410 for t = 1 to 1000: next t : rem sleep
@@ -289,23 +297,23 @@
 8830 return
 
 8900 rem sub clean main screen.
-8910 px=3: py=12: pt$ = "-             ":                        gosub 8000
-8920 px=4: py=12: pt$ = "-             ":                        gosub 8000
-8930 px=6: py=12: pt$ = "-             ":                        gosub 8000
-8940 px=4: py=26: pt$ = "-           ":                          gosub 8000
+8910 px=3: py=12:pr=0: pl=13: pt$ = " ": gosub 8000
+8920 px=4: py=12:pr=0: pl=13: pt$ = " ": gosub 8000
+8930 px=6: py=12:pr=0: pl=15: pt$ = " ": gosub 8000
+8940 px=4: py=26:pr=0: pl=12: pt$ = " ": gosub 8000
+8942 py=1: pr=0:pl=37
 8945 for px=9 to 23
-8950   py=1:      pt$ = "-                                    ": gosub 8000
+8950   pt$ = " ": gosub 8000
 8960 next px
 8970 return
 
 9000 rem sub print array
 9010 rem ** init variables
-9015 return
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
 9060 pc=0:                    rem init output array counter
-9065 px=3: py=12: pt$ = "print        ": gosub 8000
+9065 px=3: py=12: pr=0: pl=13: pt$ = "print        ": gosub 8000
 9070 rem
 9080 rem ** loop all elements and create strings for output in pa$
 9085 pa$(pc) = ""
@@ -313,25 +321,25 @@
 9100   l1$ = str$(ns(i)):                             rem get length of element
 9110   if(len(l1$)<l1) then l1$=l1$+" " : goto 9110:  rem add spaces
 9120   pa$(pc) = pa$(pc) + l1$:                       rem all element to output
-9130   if(i+1-int((i+1)/l2)*l2)=0 then pc=pc+1:pa$(pc) = "":rem if mod num of elements, add array counter
+9130   if(i+1-int((i+1)/l2)*l2)=0 then pc=pc+1:pa$(pc) = "":rem add array counte
 9140 next i
 9150 rem
 9160 rem ** output pa$() to screen
 9170 rem ** print to lines 10-20
 9180 rem ** line 22 can contain instructions to user
-9190 px=22: py=3 : pt$ = "press any key to continue" : gosub 8000
-9200 px=10: py=1:      rem setup where to print text
+9190 px=22: py=5: pr=0: pl=25 : pt$ = "press any key to continue" : gosub 8000
+9200 px=10: py=1: pr=0: pl=37 : rem setup where to print text
 9210 for i=0 to pc
 9220   pt$ = pa$(i) : gosub 8000
 9230   px = px + 1
 9240   if px>20 then px=10:gosub 10000
 9250 next i
 9270 for px=px to 20
-9275   pt$ = "-                                     "
+9275   pt$ = " "
 9280   gosub 8000
 9290 next px
 9300 gosub 10000: rem wait for keypress
-9310 px=22: py=3 : pt$ = "-                        " : gosub 8000
+9310 px=22: py=5: pr=0: pl=25 : pt$ = " " : gosub 8000
 9320 return
 
 10000 rem simple get-input-routine
