@@ -1,15 +1,8 @@
-10 rem ***********************************
-20 rem ** Test Sorting algoritms on c64 **
-30 rem **                               **
-40 rem ** By Rudi Hansen 2025-01-23     **
-45 rem ** Version 02                    **
-50 rem ***********************************
-60 rem https://builtin.com/machine-learning/fastest-sorting-algorithm
-61 rem n=100 B 2349 steps 119 sec, B2 2398 steps 104 sec, q 129 steps, 45 sec
-62 rem n=200 B 10141 steps 461 sec, B2 10227 steps 415 sec, q 265 steps, 145 sec
-63 rem n=400 Bubble 393, 1709 sec, qsort 86 sec
-64 rem n=600 Bubble 567 steps , 3785 sec, qsort 831 steps, 165 sec
-70 rem *************************************************************************
+10 rem ===================================
+20 rem    Test Sorting algoritms on c64
+30 rem 
+40 rem    By Rudi Hansen 2025-01-23
+50 rem ===================================
 
 100 print chr$(147)
 110 px=1: py=5: pr=0: pl=30 : pt$ = "test sorting algorims on c64" : gosub 8000

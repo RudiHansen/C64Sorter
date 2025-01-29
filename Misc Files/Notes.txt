@@ -1,17 +1,9 @@
-2025-01-25 : Lidt mærkelig ting jeg så på c128'eren
-             Det virker som om den er længere tid om at køre sorter programmet
-             end c64, bare lidt mærkeligt
-
-2025-01-25 : http://commodore128.mirkosoft.sk/basic_v7.html
-             Har bla. en commando til at skifte 128 i 2MHz mode
+2025-01-25 : Funny thing observed on the c128
+             It seems its slower at running this code.
+             Also its running in 1MHz mode, you can change to 2MHz mode using
              POKE 53296,1
-
-2025-01-26 : Husk at push til git med "git push" når du comitter rettelser.
-2025-01-26 : Tilføjet brugen af main screen, og sørger for at status bliver
-             udskrevet de rigtige steder på skærmen.
-2025-01-27 : Udskrivning af det sorterede array
-2025-01-27 : Add sub clean main screen
-             Changed sub print text at pos on screen, to not remove spaces if first char is a -
+             http://commodore128.mirkosoft.sk/basic_v7.html
+2025-01-25 : https://builtin.com/machine-learning/fastest-sorting-algorithm
 
 Algoritms used
         Bubble Sort:  https://www.geeksforgeeks.org/bubble-sort-algorithm/
@@ -19,10 +11,6 @@ Algoritms used
 
 TODO: Check if other sorting algoritms needs to be added
       Cleanup, renumbering 
-      Problem in sub print array, line 9000 - 9320
-        The last line of PA$ that is printed out seems to have some numbers
-        at the end that are wrong, the problem it that old lines are not overwritten
-        so "old" numbers are still there.
       Add a routine for validating if the array is sorted.
       Add user input of number of items in array, and Y/N to show result
         Think this is one of the last things to do, and the Y/N to show results
@@ -35,8 +23,11 @@ TODO: Check if other sorting algoritms needs to be added
         or if the user should just be allowed to choose witch one to use.
       Memory survailance.
         I need to test out different ways of monitoring memory usage.
-        Right now in line 4205,4208 i have tried something different than free(0)
-        But I need to have a closer look at this.
+        Tested some ways in TestFreeMem.bas, but its not good and slow.
+      Exit point in qsort
+        I have a problem with the code for qsort in lines 4000-
+        Since I was not able to figure out where the code exits
+        i have had to print the end information in lines 310 & 320
 
 
 RESULTS FROM SORT
