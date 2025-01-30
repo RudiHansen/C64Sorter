@@ -15,8 +15,8 @@
 230 print ""
 
 240 rem *** variables used in rutine
-250 rem a()  array of numbers to be sorted     change to ns
-260 rem s()  array for stack                   change to sk
+250 rem ns() array of numbers to be sorted
+260 rem sk() array for stack
 270 rem n    number of items to sort
 280 rem p    pointer to stack
 290 rem l    temp storage of item
@@ -27,7 +27,7 @@
 340 rem t    temp storage of item
 
 350 rem *** initialize stack for iterative quicksort ***
-360 sk(1)=0:sk(2)=n:p=2:                rem start with full range on stack
+360 sk(1)=0:sk(2)=n:p=2:               rem start with full range on stack
 
 370 rem *** sorting loop ***
 380 l=sk(p):p=p-1:                     rem pop high index (l)
@@ -38,17 +38,17 @@
 420 rem *** partitioning step ***
 430 if ns(i)<d then i=i+1:goto 430 :   rem find left-side value > pivot
 440 if ns(j)>d then j=j-1:goto 440 :   rem find right-side value < pivot
-450 if i>j then 490:                  rem if indices cross, partitioning is done
+450 if i>j then 490:                   rem if indices cross, partitioning is done
 
 460 rem swap ns(i) and ns(j)
 470 t=ns(i):ns(i)=ns(j):ns(j)=t
 480 i=i+1:j=j-1
-490 if i<=j then 430: :               rem continue partitioning
+490 if i<=j then 430: :                rem continue partitioning
 
 500 rem *** push new partitions onto stack if needed ***
 510 if f<j then p=p+1:sk(p)=f:p=p+1:sk(p)=j: rem left partition
-520 f=i:if f<l then 410:              rem continue with right partition
-530 if p<>0 then 380:                 rem continue if there are more partitions
+520 f=i:if f<l then 410:               rem continue with right partition
+530 if p<>0 then 380:                  rem continue if there are more partitions
 
 540 rem print array
 550 print "" : print ""
