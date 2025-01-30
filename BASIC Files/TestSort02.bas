@@ -7,7 +7,7 @@
 100 print chr$(147)
 110 px=1: py=5: pr=0: pl=30 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=200:                   rem the number of numbers to sort
+130 n=400:                   rem the number of numbers to sort
 135 n2=(n*1.2):              rem array size for the sk array, 
 137                          rem needs to be bigger than n
 140 dim ns(n):               rem the array of numbers
@@ -177,7 +177,8 @@
 4420 rem outputs:
 4430 rem - a contains partitioned array
 4440 rem - p contains pivot index
-4450 pv=ns((lo + hi) / 2): rem choose middle value as pivot
+4445 pv = ns(hi): rem choose last value as pivot
+4450 rem pv=ns((lo + hi) / 2): rem choose middle value as pivot
 4460 p = lo - 1: rem set temp pivot index
 4470 rem swap elements less than or equal to pivot, and increment temp index
 4480 for j = lo to hi - 1
