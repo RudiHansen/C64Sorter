@@ -12,13 +12,14 @@
 150                          rem needs to be bigger than n
 160 dim ns(n):               rem the array of numbers
 170 dim sk(n2):              rem the array used in qsort
-180 dim r1$(4) :             rem array for results
+180 dim r1$(20):             rem array for results
+185 ri = 0:                  rem index for r1
 190 dim pa$(n):              rem array used in sub print array
 
 191 a1=0:             rem pivot method for qsort(0=last/1=middle)
-192 a2=1:             rem set output method for array (0=skip/1=userkey/2=sleep)
+192 a2=2:             rem set output method for array (0=skip/1=userkey/2=sleep)
 193                   rem set array generation options.
-194 a3=1:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
+194 a3=0:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -35,7 +36,8 @@
 290 gosub 1000:              rem generate numbers to sort
 300 gosub 4000:              rem sort using quick sort
 310 px=6:py=12:pr=1:pl=15:pt$=str$((timer-s1)/100)+"sec.":gosub 8000
-320 r1$(2) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+320 r1$(ri) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+325 ri=ri+1
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
 
@@ -46,10 +48,9 @@
 400 gosub 8900:              rem sub clean main screen.
 
 500 print chr$(147)
-510 print r1$(0)
-520 print r1$(1)
-530 print r1$(2)
-540 print r1$(3)
+510 for i = 0 to ri-1
+520   print r1$(i)
+530 next i
 
 999 end:                     rem end program
 
@@ -114,7 +115,8 @@
 2112   px=4: py=26:: pr=1: pl=12: pt$ = str$(fre(0)): gosub 8000
 2130 next x1
 2140 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
-2150 r1$(0) = "bubble sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+2150 r1$(ri) = "bubble sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+2160 ri=ri+1
 2170 return
 
 2500 rem sub swap
@@ -141,7 +143,8 @@
 3120 if(sw=0) goto 3140: rem end sorting
 3130 next x1
 3140 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
-3150 r1$(1) = "bubble sort2"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+3150 r1$(ri) = "bubble sort2"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+3160 ri=ri+1
 3170 return
 
 3500 rem sub swap
@@ -240,7 +243,8 @@
 5164 px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)):  gosub 8000 
 5170 if i>0 then 5130
 5172 px=6: py=12: pr=1: pl=15: pt$ = str$((timer-s1)/100)+"sec." : gosub 8000
-5174 r1$(3) = "metzner sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+5174 r1$(ri) = "metzner sort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+5177 ri=ri+1
 5180 return 
 5190 t=ns(j2)
 5200 ns(j2)=ns(j2+i)
