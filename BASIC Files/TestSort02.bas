@@ -15,7 +15,8 @@
 180 dim r1$(4) :             rem array for results
 190 dim pa$(n):              rem array used in sub print array
 
-191 a1=0:                    rem pivot method for qsort(0=last/1=middle)
+191 a1=0:             rem pivot method for qsort(0=last/1=middle)
+192 a2=2:             rem set output method for array (0=skip/1=userkey/2=sleep)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -306,6 +307,7 @@
 
 9000 rem sub print array
 9010 rem ** init variables
+9015 if a2=0 then return:     rem if a2=0 skip output
 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
@@ -329,13 +331,14 @@
 9210 for i=0 to pc
 9220   pt$ = pa$(i) : gosub 8000
 9230   px = px + 1
-9240   if px>20 then px=10:gosub 10000
+9240   if px>20 then px=10: if a2=1 then gosub 10000 : if a2=2 then gosub 8400
 9250 next i
 9270 for px=px to 20
 9275   pt$ = " "
 9280   gosub 8000
 9290 next px
-9300 gosub 10000: rem wait for keypress
+9300 if a2=1 then gosub 10000: rem if a2=1 wait for keypress
+9305 if a2=2 then gosub 8400 : rem if a2=2 sleep
 9310 px=22: py=5: pr=0: pl=25 : pt$ = " " : gosub 8000
 9320 return
 
