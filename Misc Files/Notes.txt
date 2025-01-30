@@ -28,6 +28,10 @@ TODO: Check if other sorting algoritms needs to be added
         I have a problem with the code for qsort in lines 4000-
         Since I was not able to figure out where the code exits
         i have had to print the end information in lines 310 & 320
+      Error in 9000 rem sub print array
+        Line 9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
+        Need to find another way to do this, it gives problem if last item in list
+        is shorter than some of the othere.
 
 
 RESULTS FROM SORT

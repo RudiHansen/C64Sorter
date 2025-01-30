@@ -16,10 +16,13 @@
 190 dim pa$(n):              rem array used in sub print array
 
 191 a1=0:             rem pivot method for qsort(0=last/1=middle)
-192 a2=2:             rem set output method for array (0=skip/1=userkey/2=sleep)
+192 a2=1:             rem set output method for array (0=skip/1=userkey/2=sleep)
+193                   rem set array generation options.
+194 a3=1:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
+215 gosub 9000:              rem print sorted array
 220 gosub 2000:              rem sort using bubble sort
 230 gosub 9000:              rem print sorted array
 240 gosub 8900:              rem sub clean main screen.
@@ -53,34 +56,50 @@
 1000 rem sub generate numbers to sort
 1010 px=3: py=12:pr=0:pl=13 : pt$ = "gen num      " : gosub 8000
 1020 r = rnd(-se):           rem set seed for random
+1030 if a3=0 then gosub 1100
+1040 if a3=1 then gosub 1200
+1050 if a3=2 then gosub 1300
+1060 if a3=3 then gosub 1400
+1070 if a3=4 then gosub 1500
+1080 px=3: py=12: pr=0: pl=13 : pt$ = "done         " : gosub 8000
+1090 return
 
-1030 for i = 1 to n
-1040 ns(i)=int(rnd(1)*1000): rem make random data
-1050 next i
+1100 rem generate totally random data
+1110 for i = 1 to n
+1120   ns(i)=int(rnd(1)*1000)
+1130 next i
+1140 return
 
-!-1030 for i = 1 to n
-!-1040 ns(i) = i * 5 + int(rnd(1)*20) : rem rising seq with small varianses
-!-1050 next i
+1200 rem generates a nearly sorted list with small random variations
+1210 for i = 1 to n
+1220   ns(i) = i * 5 + int(rnd(1)*20)
+1230 next i
+1240 return
 
-!-1030 for i = 1 to n
-!-1040 ns(i) = (n-i) * 10 : rem reverse sorted sequence
-!-1050 next i
+1300 rem generates a reversed, fully sorted list
+1310 for i = 1 to n
+1320   ns(i) = (n-i) * 10
+1330 next i
+1340 return
 
-!-1030 for i = 1 to n
-!-1040 if rnd(1) < 0.5 then ns(i) = i * 5 else ns(i) = int(rnd(1)*1000)
-!-1050 next i
+1400 rem generates a mix of structured and random numbers
+1410 for i = 1 to n
+1420 t = rnd(1)
+1430 if t < 0.5 then  ns(i) = i * 5 
+1440 if t >= 0.5 then ns(i) = int(rnd(1)*1000)
+1450 next i
+1460 return
 
-!-1030 for i = 1 to n
-!-1040 ns(i) = i * 5 : rem start with sorted data
-!-1050 next i
-!-
-!-1060 for i = 1 to n/10 : rem swap arround 10% of the data
-!-1070 a = int(rnd(1)*n)+1 : b = int(rnd(1)*n)+1
-!-1080 te = ns(a) : ns(a) = ns(b) : ns(b) = te
-!-1090 next i
+1500 rem generate list with 10% swapped data
+1510 for i = 1 to n
+1520   ns(i) = i * 5 : rem start with sorted data
+1530 next i
+1540 for i = 1 to n/10 : rem swap arround 10% of the data
+1550   a = int(rnd(1)*n)+1 : b = int(rnd(1)*n)+1
+1560   te = ns(a) : ns(a) = ns(b) : ns(b) = te
+1570 next i
+1580 return
 
-1100 px=3: py=12: pr=0: pl=13 : pt$ = "done         " : gosub 8000
-1110 return
 
 2000 rem bubble sort
 2010 px=3: py=12: pr=0: pl=13 : pt$ = "bubble sort" : gosub 8000
