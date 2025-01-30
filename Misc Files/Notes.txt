@@ -20,24 +20,19 @@ TODO: Check if other sorting algoritms needs to be added
         I need to test out different ways of monitoring memory usage.
         Tested some ways in TestFreeMem.bas, but its not good and slow.
       Exit point in qsort
+        With the new code this should now be fixable, so i can move the 
+        code from 310 & 320 into the qsort code.
         I have a problem with the code for qsort in lines 4000-
         Since I was not able to figure out where the code exits
         i have had to print the end information in lines 310 & 320
-      Look at sorted list, not sure that the resulting sorted list is correct.
-        There might be a problem with some of the sorting methods.
-        Seen a problem with qsort, with a3=2: 2=rseq, it is not sorting the numbers right.
-        Ok its quite clear that there is a problem with the qsort sub rutine.
-        Some times it just does not sort the array correctly, and some times it
-        runs out of memory even though it can sort bigger arrays no problem.
-        
-
+      
 
 RESULTS FROM SORT
-200 BS      10227   333
-200 BS2     10227   346
-200 QS      621     70
-200 MET     1138    44
-600 BS      86392   2784
-600 BS2     86392   2925
-600 QS      2633    281
-600 MET     8270    256
+200 0   BS      10227   368
+200 0   BS2     10227   382
+200 0   QS      404     122
+200 0   MET     1138    48
+600 0   BS      86392   3013
+600 0   BS2     86392   3165
+600 0   QS      1467    524
+600 0   MET     8270    281

@@ -7,7 +7,7 @@
 100 print chr$(147)
 110 px=1: py=5: pr=0: pl=30 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=100:                    rem the number of numbers to sort
+130 n=200:                    rem the number of numbers to sort
 140 n2=(n*1.2):              rem array size for the sk array, 
 150                          rem needs to be bigger than n
 160 dim ns(n):               rem the array of numbers
@@ -18,7 +18,7 @@
 190 dim pa$(n):              rem array used in sub print array
 
 191 a1=0:             rem pivot method for qsort(0=last/1=middle)
-192 a2=1:             rem set output method for array (0=skip/1=userkey/2=sleep)
+192 a2=0:             rem set output method for array (0=skip/1=userkey/2=sleep)
 193                   rem set array generation options.
 194 a3=0:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
 
