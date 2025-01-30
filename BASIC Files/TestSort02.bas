@@ -20,7 +20,7 @@
 191 a1=0:             rem pivot method for qsort(0=last/1=middle)
 192 a2=1:             rem set output method for array (0=skip/1=userkey/2=sleep)
 193                   rem set array generation options.
-194 a3=1:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
+194 a3=0:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -155,72 +155,52 @@
 3575 sw       = 1
 3580 return
 
-4000 rem quick sort
-4010 rem commodore basic does not really support recursion because everything
-4020 rem is a global variable. however, recursion can be simulated with
-4030 rem a "stack". this "stack" is just an array, sk, and a stack index, sp.
-4040 rem source:
-4050 rem
-4060 rem inputs:
-4070 rem - ns contains array to sort
-4080 rem - n contains size of array
-4090 rem outputs: ns contains sorted array
-4100 lo = 0
-4110 hi = n - 1
-4120 s2=0
-4125 px=3: py=12: pr=0: pl=13: pt$ = "qsort": gosub 8000
-4128 s1=timer
-4130 rem recursive portion of algorithm
-4140 rem inputs:
-4150 rem - a contains array to sort
-4160 rem - lo contains low index
-4170 rem - hi contains high index
-4180 rem outputs: a contains partially sorted array
-4190 rem print status
-4200 px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):    gosub 8000
-4210 px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)): gosub 8000
-4220 if lo >= hi or lo < 0 then return
-4230 gosub 4370: rem parition array and get pivot index (p)
-4240 sp = sp + 1: sk(sp) = lo: rem push lo
-4250 sp = sp + 1: sk(sp) = hi: rem push hi
-4260 sp = sp + 1: sk(sp) = p: rem push p
-4270 hi = p - 1: gosub 4130: rem sort left side of partition
-4280 p = sk(sp): sp = sp - 1: rem pop p
-4290 hi = sk(sp): sp = sp - 1: rem pop hi
-4300 sp = sp + 1: sk(sp) = hi: rem push hi
-4310 sp = sp + 1: sk(sp) = p: rem push p
-4320 lo = p + 1: gosub 4130: rem sort right side of partition
-4330 sp = sp - 1: rem pop p (don't store)
-4340 hi = sk(sp): sp = sp - 1: rem pop hi
-4350 lo = sk(sp): sp = sp - 1: rem pop lo
-4360 return
-4370 rem partition array
-4380 rem inputs:
-4390 rem - ns contains array to partition
-4400 rem - lo contains low index
-4410 rem - hi contains high index
-4420 rem outputs:
-4430 rem - a contains partitioned array
-4440 rem - p contains pivot index
-4443 rem - set pivot method based on value of a1
-4445 if a1=0 then pv = ns(hi):           rem choose last value as pivot
-4450 if a1=1 then pv=ns((lo + hi) / 2):  rem choose middle value as pivot
-4460 p = lo - 1: rem set temp pivot index
-4470 rem swap elements less than or equal to pivot, and increment temp index
-4480 for j = lo to hi - 1
-4490     if ns(j) > pv then goto 4540
-4500     p = p + 1
-4510     t = ns(j)
-4520     ns(j) = ns(p)
-4530     ns(p) = t
-4535     s2=s2+1: rem inc step counter
-4540 next j
-4550 rem move pivot to correct position
-4560 p = p + 1
-4570 t = ns(hi)
-4580 ns(hi) = ns(p)
-4590 ns(p) = t
-4640 return
+4000 rem *** quick sort
+4010 rem *** variables used in rutine
+4020 rem ns() array of numbers to be sorted
+4030 rem sk() array for stack
+4040 rem n    number of items to sort
+4050 rem p    pointer to stack
+4060 rem l    temp storage of item
+4070 rem f    temp storage of item
+4080 rem i    counter
+4090 rem j    counter
+4100 rem d    pivot
+4110 rem t    temp storage of item
+
+4114 rem *** print start message, setup timer and s2 (step counter)
+4115 px=3: py=12: pr=0: pl=13: pt$ = "qsort": gosub 8000
+4116 s1=timer
+4118 s2=0
+
+4120 rem *** initialize stack for iterative quicksort ***
+4130 sk(1)=0:sk(2)=n:p=2:               rem start with full range on stack
+
+4140 rem *** sorting loop ***
+4150 l=sk(p):p=p-1:                     rem pop high index (l)
+4160 f=sk(p):p=p-1:                     rem pop low index (f)
+4170 i=f
+4180 j=l:d=ns((f+l)/2):                 rem choose pivot (middle value)
+
+4190 rem *** partitioning step ***
+4200 if ns(i)<d then i=i+1:goto 4200 :   rem find left-side value > pivot
+4210 if ns(j)>d then j=j-1:goto 4210 :   rem find right-side value < pivot
+4220 if i>j then 4260:                   rem if indices cross, partitioning is done
+
+4230 rem swap ns(i) and ns(j)
+4235 px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):    gosub 8000
+4238 px=4: py=26: pr=1: pl=12: pt$ = str$(fre(0)): gosub 8000
+4239 s2=s2+1:                            rem inc step counter
+4240 t=ns(i):ns(i)=ns(j):ns(j)=t
+4250 i=i+1:j=j-1
+4260 if i<=j then 4200: :                rem continue partitioning
+
+4270 rem *** push new partitions onto stack if needed ***
+4280 if f<j then p=p+1:sk(p)=f:p=p+1:sk(p)=j: rem left partition
+4290 f=i:if f<l then 4180:               rem continue with right partition
+4300 if p<>0 then 4150:                  rem continue if there are more partitions
+4310 return
+
 
 5000 rem sub metzner sort
 5010 rem n  = number of items to sort
