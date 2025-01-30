@@ -11,15 +11,16 @@
 140 n2=(n*1.2):              rem array size for the sk array, 
 150                          rem needs to be bigger than n
 160 dim ns(n):               rem the array of numbers
+165 nl = 4:                  rem length of numbers used in array
 170 dim sk(n2):              rem the array used in qsort
 180 dim r1$(20):             rem array for results
 185 ri = 0:                  rem index for r1
 190 dim pa$(n):              rem array used in sub print array
 
-191 a1=0:             rem pivot method for qsort(0=last/1=middle)
-192 a2=2:             rem set output method for array (0=skip/1=userkey/2=sleep)
+191 a1=1:             rem pivot method for qsort(0=last/1=middle)
+192 a2=1:             rem set output method for array (0=skip/1=userkey/2=sleep)
 193                   rem set array generation options.
-194 a3=0:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
+194 a3=2:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -331,7 +332,7 @@
 9000 rem sub print array
 9010 rem ** init variables
 9015 if a2=0 then return:     rem if a2=0 skip output
-9020 l1 = len(str$(ns(n)))+1: rem get len of last element in index
+9020 l1 = nl:                 rem set max str len of elements in index
 9030 l2 = int(39/l1):         rem get num of elements in output line
 9040 l3 = int(n/l2)+1:        rem num of records in output array
 9060 pc=0:                    rem init output array counter

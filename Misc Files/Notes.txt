@@ -29,12 +29,7 @@ TODO: Check if other sorting algoritms needs to be added
         is shorter than some of the othere.
       Look at sorted list, not sure that the resulting sorted list is correct.
         There might be a problem with some of the sorting methods.
-      Add logging array
-        Currently i am using the array r1$ so store the results from the different
-        sorting algoritms, but where i manually set the index when i save data in it.
-        But I would actually like to change it so i use an array with an index value.
-        So its more generaly usable.
-        I will add an index variable ri to be used instead.
+        Seen a problem with qsort, with a3=2: 2=rseq, it is not sorting the numbers right.
         
 
 
