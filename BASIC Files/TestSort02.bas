@@ -7,13 +7,15 @@
 100 print chr$(147)
 110 px=1: py=5: pr=0: pl=30 : pt$ = "test sorting algorims on c64" : gosub 8000
 120 se=150:                  rem set seed for random
-130 n=400:                   rem the number of numbers to sort
-135 n2=(n*1.2):              rem array size for the sk array, 
-137                          rem needs to be bigger than n
-140 dim ns(n):               rem the array of numbers
-150 dim sk(n2):              rem the array used in qsort
-160 dim r1$(4) :             rem array for results
-170 dim pa$(n):              rem array used in sub print array
+130 n=100:                   rem the number of numbers to sort
+140 n2=(n*1.2):              rem array size for the sk array, 
+150                          rem needs to be bigger than n
+160 dim ns(n):               rem the array of numbers
+170 dim sk(n2):              rem the array used in qsort
+180 dim r1$(4) :             rem array for results
+190 dim pa$(n):              rem array used in sub print array
+
+191 a1=0:                    rem pivot method for qsort(0=last/1=middle)
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
@@ -177,8 +179,9 @@
 4420 rem outputs:
 4430 rem - a contains partitioned array
 4440 rem - p contains pivot index
-4445 pv = ns(hi): rem choose last value as pivot
-4450 rem pv=ns((lo + hi) / 2): rem choose middle value as pivot
+4443 rem - set pivot method based on value of a1
+4445 if a1=0 then pv = ns(hi):           rem choose last value as pivot
+4450 if a1=1 then pv=ns((lo + hi) / 2):  rem choose middle value as pivot
 4460 p = lo - 1: rem set temp pivot index
 4470 rem swap elements less than or equal to pivot, and increment temp index
 4480 for j = lo to hi - 1
