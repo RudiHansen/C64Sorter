@@ -18,6 +18,10 @@ TODO: Check if other sorting algoritms needs to be added
       Memory survailance.
         I need to test out different ways of monitoring memory usage.
         Tested some ways in TestFreeMem.bas, but its not good and slow.
+      Variable a1 not used
+        I do not use a1 any more for selecting pivot point in qsort
+        I should proberly remove it at some point, but leaving it in for now
+        just in case I deside to use it again.
 
 
 RESULTS FROM SORT

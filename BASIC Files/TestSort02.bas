@@ -17,7 +17,7 @@
 185 ri = 0:                  rem index for r1
 190 dim pa$(n):              rem array used in sub print array
 
-191 a1=0:             rem pivot method for qsort(0=last/1=middle)
+191 a1=0:             rem pivot method for qsort(0=last/1=middle)(not used)
 192 a2=0:             rem set output method for array (0=skip/1=userkey/2=sleep)
 193                   rem set array generation options.
 194 a3=0:             rem (0=random/1=seq/2=rseq/3=mix/4=10%swapped)
