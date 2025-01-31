@@ -35,9 +35,6 @@
 
 290 gosub 1000:              rem generate numbers to sort
 300 gosub 4000:              rem sort using quick sort
-310 px=6:py=12:pr=1:pl=15:pt$=str$((timer-s1)/100)+"sec.":gosub 8000
-320 r1$(ri) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
-325 ri=ri+1
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
 
@@ -185,7 +182,7 @@
 4190 rem *** partitioning step ***
 4200 if ns(i)<d then i=i+1:goto 4200 :   rem find left-side value > pivot
 4210 if ns(j)>d then j=j-1:goto 4210 :   rem find right-side value < pivot
-4220 if i>j then 4260:                   rem if indices cross, partitioning is done
+4220 if i>j then 4260:                rem if indices cross, partitioning is done
 
 4230 rem swap ns(i) and ns(j)
 4235 px=4: py=12: pr=1: pl=13 : pt$ = str$(s2):    gosub 8000
@@ -197,10 +194,12 @@
 
 4270 rem *** push new partitions onto stack if needed ***
 4280 if f<j then p=p+1:sk(p)=f:p=p+1:sk(p)=j: rem left partition
-4290 f=i:if f<l then 4180:               rem continue with right partition
-4300 if p<>0 then 4150:                  rem continue if there are more partitions
-4310 return
-
+4290 f=i:if f<l then 4180:             rem continue with right partition
+4300 if p<>0 then 4150:                rem continue if there are more partitions
+4310 px=6:py=12:pr=1:pl=15:pt$=str$((timer-s1)/100)+"sec.":gosub 8000
+4320 r1$(ri) = "qsort"+str$(s2)+" steps"+str$((timer-s1)/100)+" sec."
+4330 ri=ri+1
+4340 return
 
 5000 rem sub metzner sort
 5010 rem n  = number of items to sort

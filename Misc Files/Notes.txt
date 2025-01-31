@@ -19,13 +19,7 @@ TODO: Check if other sorting algoritms needs to be added
       Memory survailance.
         I need to test out different ways of monitoring memory usage.
         Tested some ways in TestFreeMem.bas, but its not good and slow.
-      Exit point in qsort
-        With the new code this should now be fixable, so i can move the 
-        code from 310 & 320 into the qsort code.
-        I have a problem with the code for qsort in lines 4000-
-        Since I was not able to figure out where the code exits
-        i have had to print the end information in lines 310 & 320
-      
+
 
 RESULTS FROM SORT
 200 0   BS      10227   368
