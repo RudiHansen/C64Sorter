@@ -11,7 +11,6 @@ Algoritms used
 
 TODO: Check if other sorting algoritms needs to be added
       Cleanup, renumbering 
-      Add a routine for validating if the array is sorted.
       Add user input of number of items in array, and Y/N to show result
         Think this is one of the last things to do, and the Y/N to show results
         gives an option of running all tests with no pause for showing the result

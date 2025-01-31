@@ -24,23 +24,28 @@
 
 200 gosub 8500:              rem print main screen
 210 gosub 1000:              rem generate numbers to sort
+215 gosub 11000:
 220 gosub 2000:              rem sort using bubble sort
+225 gosub 11000:             rem validate array
 230 gosub 9000:              rem print sorted array
 240 gosub 8900:              rem sub clean main screen.
 
 250 gosub 1000:              rem generate numbers to sort
 260 gosub 3000:              rem sort using bubble sort2
+265 gosub 11000:             rem validate array
 270 gosub 9000:              rem print sorted array
 280 gosub 8900:              rem sub clean main screen.
 
 290 gosub 1000:              rem generate numbers to sort
 300 gosub 4000:              rem sort using quick sort
+310 gosub 11000:             rem validate array
 340 gosub 9000:              rem print sorted array
 350 gosub 8900:              rem sub clean main screen.
 
 360 gosub 8500:              rem print main screen
 370 gosub 1000:              rem generate numbers to sort
 380 gosub 5000:              rem sort using metzner sort
+385 gosub 11000:             rem validate array
 390 gosub 9000:              rem print sorted array
 400 gosub 8900:              rem sub clean main screen.
 
@@ -349,3 +354,17 @@
 10020 get a$: if a$="" then 10020
 10030 return
 
+11000 rem *** validate array is sorted.
+11010 rem *** result returned in re (0=true/1=false)
+11020 px=3: py=12:pr=0: pl=13: pt$ = "check array": gosub 8000
+11030 for i=0 to n-1
+11040   if ns(i) > ns(i+1) then goto 11100
+11050 next i
+11060 rem array is sorted
+11070 re=0
+11080 return
+11100 rem array is not sorted
+11110 re=1
+11120 r1$(ri) = "error in array "
+11130 ri=ri+1
+11140 return
